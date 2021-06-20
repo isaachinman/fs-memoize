@@ -1,5 +1,8 @@
 # fs-memoize
 
+[![npm version](https://badge.fury.io/js/fs-memoize.svg)](https://badge.fury.io/js/fs-memoize)
+[![CircleCI](https://circleci.com/gh/isaachinman/fs-memoize.svg?style=shield)](https://circleci.com/gh/isaachinman/fs-memoize)
+
 **A simple, zero-dependency NodeJs filesystem memoizer.**
 
 ### Installation
