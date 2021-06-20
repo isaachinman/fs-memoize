@@ -1,0 +1,29 @@
+version: 2.1
+executors:
+  node-browsers:
+    docker:
+      - image: circleci/node:14
+    resource_class: medium
+jobs:
+  build-and-test:
+    executor:
+      name: node-browsers
+    steps:
+      - checkout
+      - run: yarn install
+      - run: yarn build
+      - run: yarn lint
+      - run: yarn jest --coverage
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter before-build
+      - run:
+          name: Send coverage report to Code Climate
+          command: ./cc-test-reporter after-build -t lcov
+workflows:
+  build-and-test:
+    jobs:
+      - build-and-test
